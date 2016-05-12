@@ -32,7 +32,7 @@ module M2MFastInsert
       end
 
       it "executes SQL" do
-        ActiveRecord::Base.connection.should_receive(:execute).with(subject.sql)
+        expect(ActiveRecord::Base.connection).to receive(:execute).with(subject.sql)
         subject.fast_insert
       end
     end
@@ -46,7 +46,7 @@ module M2MFastInsert
       end
 
       it "doesn't execute with an empty id list" do
-        ActiveRecord::Base.connection.should_not_receive(:execute)
+        expect(ActiveRecord::Base.connection).to_not receive(:execute)
         Base.new(id, join_column_name, table_name, join_table, []).fast_insert
       end
     end

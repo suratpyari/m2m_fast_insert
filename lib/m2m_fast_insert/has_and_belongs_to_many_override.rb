@@ -1,20 +1,11 @@
 module M2MFastInsert
   module HasAndBelongsToManyOverride
-    extend ActiveSupport::Concern
-    included do
-      class_eval do
-        # Create Method chain if habtm is defined - This is because it goes down to AR::Base
-        # and errors because at the time of inclusion, there is none defined
-        alias_method_chain :has_and_belongs_to_many, :fast_inserts if self.method_defined? :has_and_belongs_to_many
-      end
-    end
-
-    # Rig the original habtm to call our method definition
+    # Decorate the original habtm to call our method definition
     #
     # name - Plural name of the model we're associating with
     # options - see ActiveRecord docs
-    def has_and_belongs_to_many_with_fast_inserts(name, options = {})
-      has_and_belongs_to_many_without_fast_inserts(name, options)
+    def has_and_belongs_to_many(name, options = {})
+      super
       define_fast_methods_for_model(name, options)
     end
 
@@ -35,4 +26,5 @@ module M2MFastInsert
     end
   end
 end
-ActiveRecord::Associations::ClassMethods.send :include, M2MFastInsert::HasAndBelongsToManyOverride
+
+ActiveRecord::Base.send :extend, M2MFastInsert::HasAndBelongsToManyOverride
