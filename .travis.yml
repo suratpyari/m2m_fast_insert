@@ -1,6 +1,14 @@
 language: ruby
+sudo: false
+cache: bundler
+bundler_args: '--path vendor/bundle'
+gemfile:
+  - gemfiles/32.gemfile
+  - gemfiles/40.gemfile
+  - gemfiles/41.gemfile
+  - gemfiles/42.gemfile
+  - gemfiles/50.gemfile
 rvm:
   - 2.1.10
   - 2.2.5
-# uncomment this line if your project needs to run something other than `rake`:
-# script: bundle exec rspec spec
+script: bundle exec rake spec

@@ -1,4 +1,6 @@
 .bundle/
+/gemfiles/.bundle
+/gemfiles/vendor
 log/*.log
 pkg/
 spec/dummy/db/*.sqlite3
