@@ -1,8 +1,8 @@
-# M2mFastInsert
+# m2m_fast_insert
 
-[![TravisCI](https://secure.travis-ci.org/jphenow/m2m_fast_insert.png "TravisCI")](http://travis-ci.org/jphenow/m2m_fast_insert "Travis-CI M2MFastInsert")
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/jphenow/m2m_fast_insert)
-[Ruby Gems](https://rubygems.org/gems/m2m_fast_insert)
+[![TravisCI](https://secure.travis-ci.org/sportngin/m2m_fast_insert.png "TravisCI")](http://travis-ci.org/sportngin/m2m_fast_insert "Travis-CI m2m_fast_insert")
+[![Code Climate](https://codeclimate.com/github/sportngin/m2m_fast_insert/badges/gpa.svg)](https://codeclimate.com/github/sportngin/m2m_fast_insert)
+[![Gem Version](https://badge.fury.io/rb/m2m_fast_insert.svg)](https://rubygems.org/gems/m2m_fast_insert)
 
 # Why
 
