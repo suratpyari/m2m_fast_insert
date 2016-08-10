@@ -12,7 +12,7 @@ rvm:
   - 2.1.10
   - 2.2.5
 script: bundle exec rake spec
-# Rails is not supported on Ruby 2.1.x
+# Rails 5 is not supported on Ruby 2.1.x
 matrix:
   exclude:
     - rvm: 2.1.10
