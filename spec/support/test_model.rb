@@ -24,6 +24,9 @@ end
 
 class User < ActiveRecord::Base
   has_and_belongs_to_many :posts
+  if Rails::VERSION::MAJOR >= 4
+    has_and_belongs_to_many :posts_without_content, -> { where(content: nil) }, class_name: 'Post'
+  end
   has_many :connections
   has_many :friends, :through => :connections
 end
