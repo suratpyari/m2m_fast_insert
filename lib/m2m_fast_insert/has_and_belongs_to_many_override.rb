@@ -3,10 +3,11 @@ module M2MFastInsert
     # Decorate the original habtm to call our method definition
     #
     # name - Plural name of the model we're associating with
-    # options - see ActiveRecord docs
-    def has_and_belongs_to_many(name, options = {})
+    # options - see ActiveRecord docs. Rails 4+ allows an optional proc in addition to the params
+    def has_and_belongs_to_many(name, *options)
       super
-      define_fast_methods_for_model(name, options)
+      m2m_options = options.last.is_a?(Hash) ? options.last : {}
+      define_fast_methods_for_model(name, m2m_options)
     end
 
     private
