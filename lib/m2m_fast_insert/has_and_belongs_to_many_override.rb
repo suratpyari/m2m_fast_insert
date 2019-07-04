@@ -20,6 +20,7 @@ module M2MFastInsert
       join_table = options[:join_table]
       join_column_name = name.to_s.downcase.singularize
       define_method "fast_#{join_column_name}_ids_insert" do |*args|
+        join_table ||= [join_column_name.pluralize, self.class.table_name].sort.join('_')
         table_name = self.class.table_name.singularize
         insert = M2MFastInsert::Base.new id, join_column_name, table_name, join_table, *args
         insert.fast_insert
