@@ -4,8 +4,8 @@ module M2MFastInsert
 
     def initialize(id, join_column_name, table_name, join_table, *args)
       @options = args[1].present? ? args[1] : {}
-      @id = id.to_i
-      @ids = args[0].collect(&:to_i)
+      @id = id
+      @ids = args[0]
       @ids.uniq! if options[:unique]
       raise ArgumentError, "Can't have nil ID, perhaps you didn't save the record first?" if id.nil?
       @join_table = join_table
