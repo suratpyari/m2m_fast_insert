@@ -6,7 +6,7 @@ module M2MFastInsert
       @options = args[1].present? ? args[1] : {}
       @id = id
       @ids = args[0]
-      @ids.uniq! if options[:unique]
+      @ids.uniq!
       raise ArgumentError, "Can't have nil ID, perhaps you didn't save the record first?" if id.nil?
       @join_table = join_table
       @join_column_name = join_column_name
@@ -16,18 +16,23 @@ module M2MFastInsert
     def inserts
       @inserts ||= begin inserts = []
                      ids.each do |given_id|
-                       inserts << "(#{id}, #{given_id})"
+                       inserts << "('#{id}', '#{given_id}')"
                      end
                      inserts.join ", "
                    end
     end
 
-    def sql
-      "INSERT INTO #{join_table} (`#{table_name}_id`, `#{join_column_name}_id`) VALUES #{inserts}"
+    def insert_sql
+      "INSERT INTO #{join_table}(#{table_name}_id, #{join_column_name}_id) VALUES #{inserts}"
+    end
+
+    def delete_sql
+      "DELETE FROM #{join_table} WHERE #{table_name}_id='#{id}'"
     end
 
     def fast_insert
-      ActiveRecord::Base.connection.execute(sql) unless ids.empty?
+      ActiveRecord::Base.connection.execute(delete_sql)
+      ActiveRecord::Base.connection.execute(insert_sql) unless ids.empty?
     end
   end
 end
